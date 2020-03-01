@@ -1,0 +1,42 @@
+[
+    {
+        "key": 1,
+        "value": "food"
+    },
+    {
+        "key": 2,
+        "value": "clothes"
+    },
+    {
+        "key": 3,
+        "value": "cosmetics"
+    },
+    {
+        "key": 4,
+        "value": "health"
+    },
+    {
+        "key": 5,
+        "value": "documents"
+    },
+    {
+        "key": 6,
+        "value": "underwear"
+    },
+    {
+        "key": 7,
+        "value": "sports equipment"
+    },
+    {
+        "key": 8,
+        "value": "jewellery"
+    },
+    {
+        "key": 9,
+        "value": "my favourite"
+    },
+    {
+        "key": 10,
+        "value": "other"
+    }
+]
