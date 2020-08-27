@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/jfdz12-okularnicy-app/precache-manifest.eb0f5cbbb7965caf408f36ad80eeb2db.js"
+  "/jfdz12-okularnicy-app/precache-manifest.b8209c1795135b798d18c6ccf8db8fb5.js"
 );
 
 self.addEventListener('message', (event) => {

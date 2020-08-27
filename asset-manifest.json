@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/jfdz12-okularnicy-app/static/css/main.0c47d992.chunk.css",
-    "main.js": "/jfdz12-okularnicy-app/static/js/main.186c7feb.chunk.js",
-    "main.js.map": "/jfdz12-okularnicy-app/static/js/main.186c7feb.chunk.js.map",
-    "runtime-main.js": "/jfdz12-okularnicy-app/static/js/runtime-main.80f2dc9c.js",
-    "runtime-main.js.map": "/jfdz12-okularnicy-app/static/js/runtime-main.80f2dc9c.js.map",
-    "static/js/2.ac0b814d.chunk.js": "/jfdz12-okularnicy-app/static/js/2.ac0b814d.chunk.js",
-    "static/js/2.ac0b814d.chunk.js.map": "/jfdz12-okularnicy-app/static/js/2.ac0b814d.chunk.js.map",
+    "main.css": "/jfdz12-okularnicy-app/static/css/main.c20bcd62.chunk.css",
+    "main.js": "/jfdz12-okularnicy-app/static/js/main.6d5d83ad.chunk.js",
+    "main.js.map": "/jfdz12-okularnicy-app/static/js/main.6d5d83ad.chunk.js.map",
+    "runtime-main.js": "/jfdz12-okularnicy-app/static/js/runtime-main.1207a0ee.js",
+    "runtime-main.js.map": "/jfdz12-okularnicy-app/static/js/runtime-main.1207a0ee.js.map",
+    "static/js/2.f9edf619.chunk.js": "/jfdz12-okularnicy-app/static/js/2.f9edf619.chunk.js",
+    "static/js/2.f9edf619.chunk.js.map": "/jfdz12-okularnicy-app/static/js/2.f9edf619.chunk.js.map",
     "index.html": "/jfdz12-okularnicy-app/index.html",
-    "precache-manifest.eb0f5cbbb7965caf408f36ad80eeb2db.js": "/jfdz12-okularnicy-app/precache-manifest.eb0f5cbbb7965caf408f36ad80eeb2db.js",
+    "precache-manifest.b8209c1795135b798d18c6ccf8db8fb5.js": "/jfdz12-okularnicy-app/precache-manifest.b8209c1795135b798d18c6ccf8db8fb5.js",
     "service-worker.js": "/jfdz12-okularnicy-app/service-worker.js",
-    "static/css/main.0c47d992.chunk.css.map": "/jfdz12-okularnicy-app/static/css/main.0c47d992.chunk.css.map",
-    "static/js/2.ac0b814d.chunk.js.LICENSE": "/jfdz12-okularnicy-app/static/js/2.ac0b814d.chunk.js.LICENSE",
+    "static/css/main.c20bcd62.chunk.css.map": "/jfdz12-okularnicy-app/static/css/main.c20bcd62.chunk.css.map",
+    "static/js/2.f9edf619.chunk.js.LICENSE.txt": "/jfdz12-okularnicy-app/static/js/2.f9edf619.chunk.js.LICENSE.txt",
     "static/media/App.css": "/jfdz12-okularnicy-app/static/media/background.2043bcd7.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.80f2dc9c.js",
-    "static/js/2.ac0b814d.chunk.js",
-    "static/css/main.0c47d992.chunk.css",
-    "static/js/main.186c7feb.chunk.js"
+    "static/js/runtime-main.1207a0ee.js",
+    "static/js/2.f9edf619.chunk.js",
+    "static/css/main.c20bcd62.chunk.css",
+    "static/js/main.6d5d83ad.chunk.js"
   ]
 }
