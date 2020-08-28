@@ -27,13 +27,22 @@ export class SignUp extends React.Component {
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(() => {
                 const user = firebase.auth().currentUser
-
+                const walletRef = firebase.database().ref(`users/${user.uid}/budget/wallet/`)
                 if (user) {
                     user.updateProfile({
                         displayName: name,
                     })
                         .then(s => console.log(s))
                         .catch(err => console.log(err))
+                    walletRef.set({
+                        budget: [
+                                    {amount: 0,
+                                    currency: "PLN"}
+                                ] ,
+                            mainCurrency : "PLN"
+                        }
+                    )
+        
                 }
             })
             .catch(({ message }) => {

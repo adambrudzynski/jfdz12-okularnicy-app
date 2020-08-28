@@ -33,8 +33,14 @@ export const Wallet = () => {
                setloading(false)
                console.log(wallet)
                
-            }else {
-                setWallet(null)
+               
+            }else if (list === null){
+                console.log("Wallet empty", list);
+                
+            }
+            
+            else {
+                setWallet(list)
                 setloading(false)
             }
         })
