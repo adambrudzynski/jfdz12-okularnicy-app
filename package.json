@@ -2,12 +2,11 @@
   "name": "packmeapp",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://adambrudzynski.github.io/jfdz12-okularnicy-app/",
   "dependencies": {
     "@material-ui/core": "^4.9.11",
     "@material-ui/icons": "^4.9.1",
     "axios": "^0.19.2",
-    "firebase": "^7.14.2",
+    "firebase": "^7.19.1",
     "gh-pages": "^2.2.0",
     "lodash": "^4.17.20",
     "react": "^16.13.1",
