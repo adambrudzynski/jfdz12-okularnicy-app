@@ -6,6 +6,7 @@ import { ItemSearchInput } from '../input/Input'
 import { RadioSelect } from '../radio/Radio';
 import { AddToList } from '../user-list/AddToList';
 import "./Main-list.css"
+import { TopHeader } from '../navigation/TopHeader';
 
 
 function MainList() {
@@ -86,18 +87,24 @@ function MainList() {
 
     if (loading) {
         return (
+            <>
+             <TopHeader content='Items' subcontent='Pick items to your list'/>
             <Segment>
                 <Dimmer active inverted>
                     <Loader size='large'>Loading</Loader>
                 </Dimmer>
                 <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-            </Segment>)
+            </Segment>
+            </>)
     }
     if (error) {
-        return <h1>"An error occured"</h1>
+        return <>
+         <TopHeader content='Items' subcontent='Pick items to your list'/>
+        <h1>"An error occured"</h1>
+        </>
     }
     return <>
-        <h1> What you need ? ;)</h1>
+        <TopHeader content='Items' subcontent='Pick items to your list'/>
         <Segment.Group horizontal className="filters">
             <Segment className="filter">
                 <ItemSearchInput

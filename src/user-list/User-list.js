@@ -3,6 +3,7 @@ import { Image, List, Segment, Loader, Dimmer, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import { AddToList } from '../user-list/AddToList';
 import { MyContext } from '../auth/Auth'
+import { TopHeader } from '../navigation/TopHeader';
 
 export default class UserList extends React.Component {
     static contextType = MyContext
@@ -49,23 +50,19 @@ export default class UserList extends React.Component {
 
 
     render() {
-        if (this.state.loading) {
-            return (
-                <Segment>
+        return <>
+        <TopHeader content={'My list'} subcontent='pack, unpack, delete items from list'/>
+
+        {this.state.error && <h1>"An error occured"</h1>}
+        {this.state.loading && <Segment>
                     <Dimmer active inverted>
                         <Loader size='large'>Loading</Loader>
                     </Dimmer>
                     <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-                </Segment>)
+                </Segment>
         }
-        if (this.state.error) {
-            return <h1>"An error occured"</h1>
-        }
-
-
-        return <>
-            <h1> Things to pack</h1>
-            {this.context.state.userList.length < 1
+        {(!this.state.loading && !this.state.error) &&
+            (this.context.state.userList.length < 1)
             ? <> <h3>Nothing to pack</h3> <Link to='/' ><Button color="orange" fluid content="See list of items"/></Link></>
             :<List divided>
                 {
@@ -92,5 +89,6 @@ export default class UserList extends React.Component {
                 }
             </List>}
         </>
+        
     }
 }

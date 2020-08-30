@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Icon, Menu, Button, Image, Label } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
-import firebase from 'firebase'
 import { MyContext } from '../auth/Auth';
 
 const Navigation = () => {
@@ -16,6 +15,7 @@ const Navigation = () => {
     <Menu icon='labeled' size='mini' fixed='bottom'>
       <Link to="/user-list">
         <Menu.Item
+          as='div'
           name='list'
           active={activeItem === 'list'}
           onClick={handleItemClick}
@@ -29,6 +29,7 @@ const Navigation = () => {
       </Link>
       <Link to="/">
         <Menu.Item
+          as='div'
           name='home'
           active={activeItem === 'home'}
           onClick={handleItemClick}
@@ -39,6 +40,7 @@ const Navigation = () => {
       </Link>
       <Link to="/wallet">
         <Menu.Item
+          as='div'
           name='wallet'
           active={activeItem === 'wallet'}
           onClick={handleItemClick}
@@ -47,25 +49,6 @@ const Navigation = () => {
           Wallet
         </Menu.Item>
       </Link>
-
-      {context.state.user && <Menu.Menu position='right'>
-        <Link to={'/userProfile'}>
-          <Menu.Item
-            name='user'
-            active={activeItem === 'user'}
-            onClick={handleItemClick}
-          >
-            <Image
-              size="mini"
-              avatar
-              src={context.state.user.photoURL || '/assets/userPlaceholder.jpg'} />
-          </Menu.Item>
-
-        </Link>
-        <Menu.Item>
-          <Button onClick={handleLogout} content="Logout" />
-        </Menu.Item>
-      </Menu.Menu>}
     </Menu>
 
   )

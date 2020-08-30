@@ -5,6 +5,7 @@ import firebase from "firebase";
 import WalletOverview from './WalletOverview'
 import Spendings from './Spendings'
 import Charts from './Charts';
+import { TopHeader } from '../navigation/TopHeader';
 
 export const Wallet = () => {
     const [wallet, setWallet] = useState([])
@@ -90,6 +91,7 @@ export const Wallet = () => {
     }
 
     return <>
+    <TopHeader content='Wallet' subcontent='Manage your budget'/>
         <Responsive maxWidth={650}>
             <WalletOverview wallet={wallet} loading={loading} spent={spent}/>
             <Spendings spendings={spendings} error={spendingError} loading={spendingsLoading} mainCurrency={wallet.mainCurrency} />

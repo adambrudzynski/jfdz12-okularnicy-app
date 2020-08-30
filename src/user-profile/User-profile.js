@@ -5,6 +5,7 @@ import firebase from 'firebase'
 import 'firebase/storage';
 
 import { MyContext } from '../auth/Auth'
+import { TopHeader } from '../navigation/TopHeader';
 
 
 export default class UserProfile extends React.Component {
@@ -75,8 +76,9 @@ export default class UserProfile extends React.Component {
 
     render() {
         const { editPhoto, img, uploadError, uploadProgress, uploadSuccess, visible, uploadMessage } = this.state;
-        return < Container>
-            <Header>User Panel </Header>
+        return <>
+         <TopHeader content='User profile' subcontent='Manage your account'/>
+        < Container>
             <Grid columns={2} relaxed='very' stackable>
                 <Grid.Column>
                     <Card>
@@ -113,5 +115,6 @@ export default class UserProfile extends React.Component {
                 </Grid.Column>
             </Grid>
         </ Container>
+        </>
     }
 }

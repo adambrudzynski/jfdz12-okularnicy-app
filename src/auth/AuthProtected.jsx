@@ -1,22 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Segment, Loader, Dimmer, Placeholder } from 'semantic-ui-react';
-import firebase from "firebase";
+import React, { useContext} from 'react'
+import { Segment, Placeholder } from 'semantic-ui-react';
 import { Login } from './LogIn'
+import { TopHeader } from '../navigation/TopHeader';
+import { MyContext } from '../auth/Auth';
 
+const AuthProtected = (props) => {
 
+     const context = useContext(MyContext)
+     const {user} = context.state
 
-
- const AuthProtected = (props) => {
-
-    const [user, setUser] = useState(false)
-     useEffect(() => {
-         auth()
-        //  return () => {
-            //  cleanup
-        //  }
-     }, [])
-
-     const loading =    <> 
+     const loading = () =>   <> 
                     <Segment>
                     <Placeholder fluid>             
                         <Placeholder.Line length='full' />
@@ -34,18 +27,15 @@ import { Login } from './LogIn'
                 </Segment>
                 </> 
 
+    const content = () => <>
+        {/* <TopHeader content={'Test header'} subcontent={'Test subheader'}/> */}
+        {{...props.children}}
+    </>
 
-    const auth = () => firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          setUser(user) 
-        } else {
-           setUser(null)
-        }
-      });
       return <>
-        {user === false &&  loading}
+        {user === false &&  loading()}
         {user === null && <Login/>}
-        {user && {...props.children}}
+        {user && content()}
         </>
     
 }
