@@ -7,7 +7,7 @@ const Charts = ({wallet, spent}) => {
         return Object.keys(obj).reduce((sum,key)=>sum+parseFloat(obj[key]||0),0);
     }
     
-    const calculateSpent = () => {
+    const calculateSpent = (spent) => {
         const sum = objPpertySum(spent.spentCalculated)   
         return parseFloat(sum).toFixed(2)
     }
@@ -15,7 +15,7 @@ const Charts = ({wallet, spent}) => {
         
         color: "#E38627",
         title: "Spent",
-        value: parseInt( calculateSpent())
+        value: parseInt( calculateSpent(spent))
         },
         {
         color: "#C13C37",
@@ -30,7 +30,6 @@ const Charts = ({wallet, spent}) => {
     data={chartData}
     label={(data) => `${parseFloat(data.data[data.dataIndex].percentage).toFixed(1)}% ${data.data[data.dataIndex].title}`}
     labelPosition={70}
-    // lengthAngle={360}
     lineWidth={15}
     paddingAngle={0}
     radius={50}
@@ -41,6 +40,8 @@ const Charts = ({wallet, spent}) => {
         fontSize: "6px"      
       }}
        />
-}
+     }
+
+
 
 export default Charts

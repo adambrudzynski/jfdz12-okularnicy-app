@@ -13,7 +13,7 @@ const Navigation = () => {
 
   return (
     <Menu icon='labeled' size='mini' fixed='bottom'>
-      <Link to="/user-list">
+      {/* <Link to="/user-list">
         <Menu.Item
           as='div'
           name='list'
@@ -26,7 +26,7 @@ const Navigation = () => {
           </Label>}
           My list
         </Menu.Item>
-      </Link>
+      </Link> */}
       <Link to="/">
         <Menu.Item
           as='div'

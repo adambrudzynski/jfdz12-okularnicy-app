@@ -15,7 +15,7 @@ export default class UserList extends React.Component {
     }
 
     componentDidMount() {
-        fetch("https://okularnicy-app.firebaseio.com/items.json")
+        fetch("https://packmeapp-77c66.firebaseio.com/items.json")
             .then(response => response.json())
             .then(data => {
                 if (data) {
@@ -51,8 +51,6 @@ export default class UserList extends React.Component {
 
     render() {
         return <>
-        <TopHeader content={'My list'} subcontent='pack, unpack, delete items from list'/>
-
         {this.state.error && <h1>"An error occured"</h1>}
         {this.state.loading && <Segment>
                     <Dimmer active inverted>

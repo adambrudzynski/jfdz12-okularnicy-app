@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Responsive } from 'semantic-ui-react'
+import { Grid, Responsive, Button } from 'semantic-ui-react'
 import firebase from "firebase";
 
 import WalletOverview from './WalletOverview'
@@ -16,6 +16,12 @@ export const Wallet = () => {
     const [spendingsLoading, setSpendingsLoading] = useState(false)
     const [error, setError] = useState(null)
     const [spendingError, setSpendingError] = useState(null)
+    const [activeMenu, setActiveMenu] = useState(0)
+
+    const mobilemenu = <Button.Group floated='right' style={{'marginRight': '50px'}} >
+                             <Button basic={activeMenu === 0 ? false : true } color='teal' onClick={()=> setActiveMenu(0)} icon='list alternate outline'/>
+                             <Button basic={activeMenu === 1 ? false : true } color='teal' onClick={()=> setActiveMenu(1)} disabled={wallet.budget && spent? false:true} icon='pie chart' />
+                        </Button.Group>
 
     const uid = firebase.auth().currentUser.uid;
     const spendingsRef = firebase.database().ref(`users/${uid}/budget/spendings/`)
@@ -91,12 +97,16 @@ export const Wallet = () => {
     }
 
     return <>
-    <TopHeader content='Wallet' subcontent='Manage your budget'/>
+
         <Responsive maxWidth={650}>
-            <WalletOverview wallet={wallet} loading={loading} spent={spent}/>
-            <Spendings spendings={spendings} error={spendingError} loading={spendingsLoading} mainCurrency={wallet.mainCurrency} />
+            <TopHeader content='Wallet' subcontent='Manage your budget' mobileMenu={mobilemenu} />
+            {activeMenu === 0 
+            ?<><WalletOverview wallet={wallet} loading={loading} spent={spent}/>
+            <Spendings spendings={spendings} error={spendingError} loading={spendingsLoading} mainCurrency={wallet.mainCurrency} /></>
+            :<Charts wallet={wallet} spent={spent}/>}
         </Responsive>
         <Responsive minWidth={651} >
+        <TopHeader content='Wallet' subcontent='Manage your budget'/>
             <Grid columns={2} >
                 <Grid.Column >
                     <WalletOverview wallet={wallet} loading={loading} spent={spent} />

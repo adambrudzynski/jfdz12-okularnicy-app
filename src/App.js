@@ -10,6 +10,7 @@ import UserProfile from './user-profile/User-profile';
 import { ItemForm } from './item-form/Item-form';
 import AuthProtected from './auth/AuthProtected';
 import { Wallet } from './wallet/Wallet';
+import { Lists } from './main-list/Lists';
 
 
 
@@ -52,7 +53,7 @@ function App() {
               />
               <Route
                 path="/"
-                component={MainList}
+                component={Lists}
               />
               <Redirect to="/" />
             </Switch>

@@ -4,7 +4,7 @@ import {Dropdown, Image, Header, Button, Icon } from 'semantic-ui-react'
 import { MyContext } from '../auth/Auth';
 
 
-export const TopHeader = ({content, subcontent}) => {
+export const TopHeader = ({content, subcontent, mobileMenu}) => {
     const context = useContext(MyContext)
     const handleLogout = () => context.logout()
 
@@ -16,6 +16,9 @@ export const TopHeader = ({content, subcontent}) => {
     return <>
         <Header size='large' >
             {content}
+
+            
+
             <Dropdown 
               icon={null}
               pointing='top right'
@@ -31,7 +34,8 @@ export const TopHeader = ({content, subcontent}) => {
                   <Icon name='sign out'/>  Logout
                 </Dropdown.Item>
                 </Dropdown.Menu>
-              </Dropdown>
+            </Dropdown>
+            {mobileMenu}
             {subcontent && <Header.Subheader>{subcontent}</Header.Subheader>}
         </Header>
       </>

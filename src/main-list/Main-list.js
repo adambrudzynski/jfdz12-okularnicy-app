@@ -6,7 +6,6 @@ import { ItemSearchInput } from '../input/Input'
 import { RadioSelect } from '../radio/Radio';
 import { AddToList } from '../user-list/AddToList';
 import "./Main-list.css"
-import { TopHeader } from '../navigation/TopHeader';
 
 
 function MainList() {
@@ -30,7 +29,7 @@ function MainList() {
     }
 
     useEffect(() => {
-        fetch('https://okularnicy-app.firebaseio.com/items.json')
+        fetch('https://packmeapp-77c66.firebaseio.com/items.json')
             .then(response => response.json())
             .then(data => {
                 if (data) {
@@ -88,7 +87,7 @@ function MainList() {
     if (loading) {
         return (
             <>
-             <TopHeader content='Items' subcontent='Pick items to your list'/>
+             {/* <TopHeader content='Items' subcontent='Pick items to your list'/> */}
             <Segment>
                 <Dimmer active inverted>
                     <Loader size='large'>Loading</Loader>
@@ -99,12 +98,12 @@ function MainList() {
     }
     if (error) {
         return <>
-         <TopHeader content='Items' subcontent='Pick items to your list'/>
+         {/* <TopHeader content='Items' subcontent='Pick items to your list'/> */}
         <h1>"An error occured"</h1>
         </>
     }
     return <>
-        <TopHeader content='Items' subcontent='Pick items to your list'/>
+        {/* <TopHeader content='Items' subcontent='Pick items to your list'/> */}
         <Segment.Group horizontal className="filters">
             <Segment className="filter">
                 <ItemSearchInput
