@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import firebase from 'firebase'
-import { Card, Label, Modal, Button, Segment } from 'semantic-ui-react'
+import { Card, Label, Modal, Button, Segment, Icon } from 'semantic-ui-react'
 import SpendingForm from './SpendingForm'
 import CardPlaceholder from '../Placeholders/CardPlaceholder'
 import { MyContext } from '../auth/Auth';
@@ -33,7 +33,7 @@ export default ({ spendings, loading, error, mainCurrency }) => {
                  <Label  color='teal'>
                   {spending.type}
                   </Label>
-                  {spending.place && <Label>{spending.place.slice(0, 50)}</Label>}
+                  {spending.place && <Label> <Icon name='location arrow'/>{spending.place.slice(0, 50)}</Label>}
                   {` ${spending.amount} ${spending.currency}`}
               </Card.Header>
               <Card.Meta>{spending.date} {spending.hour}</Card.Meta>

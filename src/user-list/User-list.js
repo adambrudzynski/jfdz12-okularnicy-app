@@ -3,7 +3,6 @@ import { Image, List, Segment, Loader, Dimmer, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import { AddToList } from '../user-list/AddToList';
 import { MyContext } from '../auth/Auth'
-import { TopHeader } from '../navigation/TopHeader';
 
 export default class UserList extends React.Component {
     static contextType = MyContext

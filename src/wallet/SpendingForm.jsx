@@ -33,7 +33,7 @@ export default ({ edit, mainCurrency }) => {
         }
     }
 
-    const [rate, setRate] = useState(edit? edit.rate : null)
+    const [rates, setRates] = useState(edit? edit.rate : null)
     const [success, setSuccess] = useState(null)
     const [modalOpen, setModalOpen] = useState(false)
     const { register, setValue, handleSubmit, watch, errors, reset, getValues } = useForm({ defaultValues: edit || emptyForm })
@@ -56,13 +56,11 @@ export default ({ edit, mainCurrency }) => {
         const timestamp = Date.now();
         const timestampEdit = Date.now();
         const amount = parseInt(data.amount)
-        const amountInBaseCurr = (data.amount/rate)
 
         const form = {
             timestamp : Date.now(),
             timestampEdit : Date.now(),
             amount : parseInt(data.amount),
-            amountInBaseCurr : (data.amount/rate)
         }
         
         console.log(form);
@@ -70,9 +68,7 @@ export default ({ edit, mainCurrency }) => {
             console.log('edit', data)
             firebase.database().ref(`users/${uid}/budget/spendings/${edit.id}`).update({
                 timestampEdit,
-                rate,
-                baseCurr: mainCurrency,
-                amountInBaseCurr,
+                rates,
                 ...data,
                 amount
                 
@@ -84,9 +80,7 @@ export default ({ edit, mainCurrency }) => {
         console.log(spendingKey);
         firebase.database().ref(`users/${uid}/budget/spendings/${spendingKey}/`).set({
             timestamp,
-            rate,
-            baseCurr: mainCurrency,
-            amountInBaseCurr,
+            rates,
             ...data,
             amount
         })
@@ -95,9 +89,10 @@ export default ({ edit, mainCurrency }) => {
         timeout()
     };
 
-    const setCurrency = (currency, rate) => {
+    const setCurrency = (currency, rate, rates) => {
         setValue('currency', currency)
-        setRate(rate)
+        setRates(rates)
+        console.log(rates);
     }
 
     return <>
@@ -110,7 +105,7 @@ export default ({ edit, mainCurrency }) => {
                         : <Button onClick={() => setModalOpen(true)} className='spendings__btn--fixed' color='orange' icon='plus' circular size='big' />}>
             <Modal.Content>
                 <Modal.Description>
-                    <Message color={success ? 'green' : 'gray'}>
+                    <Message success={success ? true: false}>
                         <Message.Header>
                             {edit 
                                 ? "Edit spending" 

@@ -4,12 +4,12 @@ import firebase from "firebase";
 
 import WalletOverview from './WalletOverview'
 import Spendings from './Spendings'
-import Charts from './Charts';
 import { TopHeader } from '../navigation/TopHeader';
+import { calculateSpent } from './currencies';
+import Charts from './Charts';
 
 export const Wallet = () => {
     const [wallet, setWallet] = useState([])
-    const [rates, setRates] = useState()
     const [spent, setSpent] = useState(0)
     const [spendings, setSpendings] = useState([])
     const [loading, setloading] = useState(false)
@@ -26,41 +26,49 @@ export const Wallet = () => {
     const uid = firebase.auth().currentUser.uid;
     const spendingsRef = firebase.database().ref(`users/${uid}/budget/spendings/`)
     const walletRef = firebase.database().ref(`users/${uid}/budget/wallet/`)
+    
     useEffect(() => {
         getWallet()
-        getSpending() 
+        getSpending()
     }, [])
-
+        
     const getWallet = () => {
         setloading(true)
         walletRef.on('value', (snapshot) => {
             let list = snapshot.val()
             if (list) {
                setWallet(list)
-               setloading(false)
-               console.log(wallet)
-               
-               
+               setloading(false)  
             }else if (list === null){
                 console.log("Wallet empty", list);
-                
+                walletRef.set({
+                    budget: [
+                                {amount: 0,
+                                currency: "PLN"}
+                            ] ,
+                        mainCurrency : "PLN"
+                    }
+                )
             }
             
             else {
                 setWallet(list)
                 setloading(false)
             }
-        })
-        
-            }
-   
+        }) 
+    }
+
+    const getData = async (list) => {
+        const currency = await walletRef.once('value').then(snapshot=> snapshot.val().mainCurrency)
+        setSpent(calculateSpent(list, currency))
+    }
+
 
     const getSpending = () => {
         setSpendingsLoading(true)
         spendingsRef.on('value', (snapshot) => {
             let list = snapshot.val()
             if (list) {
-                console.log("List not empty");
                 const keys = Object.keys(list);
                 const formattedData = keys.map(key => {
                     return {
@@ -69,35 +77,16 @@ export const Wallet = () => {
                     }
                 })
                 .reverse()
-                setSpent(calculateSpent(formattedData))
                 setSpendings(formattedData)
+                getData(formattedData)
             } else {
                 setSpendings(null)
             }
             setSpendingsLoading(false)
-        })
-    }
-
-    const calculateSpent = (list) => {
-       let spent = {}
-       let spentCalculated = {}
-
-       list.reduce((acc, val)=> {
-            const o = acc.filter((obj)=>{
-                return obj.currency==val.currency;
-            }).pop() || {currency:val.currency, amount:0, amountInBaseCurr: 0};
-            o.amountInBaseCurr += val.amountInBaseCurr
-            o.amount += val.amount;
-            !acc.includes(o) && acc.push(o);
-            spent[o.currency] = o.amount
-            spentCalculated[o.currency] = o.amountInBaseCurr
-            return acc;
-        },[]);
-        return {spent, spentCalculated}
+        })  
     }
 
     return <>
-
         <Responsive maxWidth={650}>
             <TopHeader content='Wallet' subcontent='Manage your budget' mobileMenu={mobilemenu} />
             {activeMenu === 0 

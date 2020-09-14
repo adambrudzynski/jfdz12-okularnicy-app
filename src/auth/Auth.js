@@ -30,7 +30,7 @@ export class AuthContext extends React.Component {
 
     fetchList = () => {
         if (this.state.user) {
-            firebase.database().ref('user-items/' + this.state.user.uid + '/list')
+            firebase.database().ref(`users/${this.state.user.uid}/items`)
                 .on('value', (snapshot) => {
                     let list = snapshot.val()
                     list ? this.setState({ userList: list }) : this.setState({ userList: [] })
@@ -43,8 +43,8 @@ export class AuthContext extends React.Component {
         addedItem.done = false
         this.setState({
             userList: [...this.state.userList, addedItem]
-        }, () => firebase.database().ref('user-items/' + this.state.user.uid).set({
-            list: [...this.state.userList]
+        }, () => firebase.database().ref(`users/${this.state.user.uid}/items`).set({
+            ...this.state.userList
         }))
     }
 
@@ -57,8 +57,8 @@ export class AuthContext extends React.Component {
         this.setState({
             userList: userlist
 
-        }, () => firebase.database().ref('user-items/' + this.state.user.uid).set({
-            list: [...this.state.userList]
+        }, () => firebase.database().ref(`users/${this.state.user.uid}/items`).set({
+            ...this.state.userList
         }))
     }
     markAsDone = (e) => {
@@ -72,8 +72,8 @@ export class AuthContext extends React.Component {
         this.setState({
             userList: userlist
 
-        }, () => firebase.database().ref('user-items/' + this.state.user.uid).set({
-            list: [...this.state.userList]
+        }, () => firebase.database().ref(`users/${this.state.user.uid}/items`).set({
+            ...this.state.userList
         }))
     }
 

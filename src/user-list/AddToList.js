@@ -15,7 +15,7 @@ export function AddToList(props) {
 
             {props.desc &&
                 (isPacked()
-                    ? <Label color='green' horizontal>
+                    ? <Label color='teal' horizontal>
                         Packed
               </Label>
                     
@@ -26,10 +26,10 @@ export function AddToList(props) {
             }
             {props.list &&
                 <Button size="large" color={isPacked() && "orange"} icon floated='right' onClick={() => userList.markAsDone(props.item.id)}>
-                    <Icon color={isPacked() && "green"} name='check' />
+                    <Icon color={isPacked() && "teal"} name='check' />
                 </Button>}
         </>
-        : <Button color='green' floated='right' size={"large"} icon onClick={() => userList.addToList(props.item)}>
+        : <Button color='teal' floated='right' size={"large"} icon onClick={() => userList.addToList(props.item)}>
             <Icon name='plus' />
         </Button>
     }
