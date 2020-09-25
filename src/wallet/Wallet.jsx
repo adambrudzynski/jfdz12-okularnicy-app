@@ -8,6 +8,11 @@ import { TopHeader } from '../navigation/TopHeader';
 import { calculateSpent } from './currencies';
 import Charts from './Charts';
 
+
+const sorter = (x, y) => {
+    return  y.timestamp - x.timestamp
+}
+
 export const Wallet = () => {
     const [wallet, setWallet] = useState([])
     const [spent, setSpent] = useState(0)
@@ -76,7 +81,8 @@ export const Wallet = () => {
                         ...list[key]
                     }
                 })
-                .reverse()
+                // .reverse()
+                .sort(sorter)
                 setSpendings(formattedData)
                 getData(formattedData)
             } else {

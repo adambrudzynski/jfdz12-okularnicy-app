@@ -1,6 +1,8 @@
 import React from 'react'
 import PieChart from "react-minimal-pie-chart"
 import randomColor from 'randomcolor'
+import { Header } from 'semantic-ui-react'
+import {currencyColors} from '../constants/colors'
 
 const Charts = ({wallet, spent}) => {
 
@@ -18,30 +20,32 @@ const Charts = ({wallet, spent}) => {
 
         const spentCurr = Object.entries(spent.spentCalculated).map(amount => {
             return {
-                color: randomColor(),
+                color: currencyColors[amount[0]],
                 title: amount[0],
                 value: amount[1]
         }
         })
 
-    return <> <PieChart
+    return <> 
+    <Header>Total budget</Header>
+    <PieChart
         animate
         center={[50, 50]}
         data={chartData}
         label={(data) => `${parseFloat(data.data[data.dataIndex].percentage).toFixed(1)}% ${data.data[data.dataIndex].title}`}
-        labelPosition={30}
-        lineWidth={15}
+        labelPosition={68}
+        lineWidth={20}
         paddingAngle={0}
-        radius={45}
+        radius={30}
         rounded
         startAngle={0}
-        viewBoxSize={[130, 130]}
+        viewBoxSize={[130, 110]}
         labelStyle={{
-            fontSize: "6px"    
+            fontSize: "5px"  
         }}
         />
-
-        <PieChart
+    <Header>Spendings by currency</Header>
+    <PieChart
         animate
         center={[50, 50]}
         data={spentCurr}
@@ -50,9 +54,8 @@ const Charts = ({wallet, spent}) => {
         lineWidth={40}
         paddingAngle={2}
         radius={30}
-        // rounded
         startAngle={0}
-        viewBoxSize={[130, 110]}
+        viewBoxSize={[130, 80]}
         labelStyle={{
             fontSize: "4px",
             fill: "#00b5ad"    

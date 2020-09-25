@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { Currency } from './currency'
 import { MyContext } from '../auth/Auth';
 import {spendingCategories} from '../constants/spendingCategory'
+import { CardBtn } from '../GenericComponents/Card';
 
 const now = new Date()
 const options =  spendingCategories.map(item => ({key: item, text: item, value: item}))
@@ -104,7 +105,8 @@ export default ({ edit, mainCurrency }) => {
             closeOnDimmerClick={false}
             size="tiny" 
             trigger={edit 
-                        ? <Button icon='edit' onClick={() => setModalOpen(true)} /> 
+                        // ? <Button icon='edit' onClick={() => setModalOpen(true)} /> 
+                        ? <CardBtn icon='edit' side='right' onClick={() => setModalOpen(true)}/>
                         : <Button onClick={() => setModalOpen(true)} className='spendings__btn--fixed' color='orange' icon='plus' circular size='big' />}>
             <Modal.Content>
                 <Modal.Description>

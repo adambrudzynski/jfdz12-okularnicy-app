@@ -5,7 +5,8 @@ const changeMockCurrency = mockSpendings.map(spending => {
     const currencies = ['MYR', 'NOK','PHP','PLN','EUR','RUB','SEK', 'USD']
    return {
        ...spending,
-       currency: currencies[Math.floor(Math.random() * (6 - 0 + 1)) + 0]
+       currency: currencies[Math.floor(Math.random() * (6 - 0 + 1)) + 0],
+       timestamp: Date.parse(`${spending.date} ${spending.hour}`)/1000
    }
 })
 
@@ -33,3 +34,10 @@ export const createDemoUser = async () => {
             }
             );
 }
+
+
+
+
+// Date.parse(your date here)/1000
+
+// Date.parse(new Date(2015, 5, 11, 12, 0, 0))/1000

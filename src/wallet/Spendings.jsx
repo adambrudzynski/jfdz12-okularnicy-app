@@ -1,9 +1,11 @@
 import React, {useContext} from 'react'
 import firebase from 'firebase'
-import { Card, Label, Modal, Button, Segment, Icon } from 'semantic-ui-react'
+import { Segment } from 'semantic-ui-react'
 import SpendingForm from './SpendingForm'
 import CardPlaceholder from '../Placeholders/CardPlaceholder'
 import { MyContext } from '../auth/Auth';
+import { Card } from '../GenericComponents/Card'
+import { typeColors } from '../constants/colors'
 
 
 export default ({ spendings, loading, error, mainCurrency }) => {
@@ -11,6 +13,19 @@ export default ({ spendings, loading, error, mainCurrency }) => {
   const database = firebase.database()
   const user = useContext(MyContext)
   const uid = user.state.user.uid
+
+  const remove = (id) => {
+    database.ref(`users/${uid}/budget/spendings/${id}`).remove()
+      .then(function() {
+        console.log("Remove succeeded.")
+      })
+      .catch(function(error) {
+        console.log("Remove failed: " + error.message)
+      });
+    console.log('remove', id);
+  }
+
+ 
 
   if (error) return <h2>Error :(</h2>
   if (loading) return <> <CardPlaceholder /><CardPlaceholder /><CardPlaceholder /><CardPlaceholder /> </>
@@ -23,32 +38,22 @@ export default ({ spendings, loading, error, mainCurrency }) => {
   </>
   return <>
     <SpendingForm  mainCurrency={mainCurrency} />
-    <Card.Group>
     {
       spendings.map(spending => {
-        return           <Card fluid color='yellow' key={spending.id}>
-            <Card.Content>
-              <Card.Header textAlign='right'>
-              
-                 <Label  color='teal'>
-                  {spending.type}
-                  </Label>
-                  {spending.place && <Label> <Icon name='location arrow'/>{spending.place.slice(0, 50)}</Label>}
-                  {` ${spending.amount} ${spending.currency}`}
-              </Card.Header>
-              <Card.Meta>{spending.date} {spending.hour}</Card.Meta>
-              <Card.Description style={{ overflowWrap: 'break-word' }}>
-                {spending.desc}
-                <Button.Group floated='right' basic compact>
-                <SpendingForm edit={spending} mainCurrency={mainCurrency} />
-                <Button icon='trash' onClick={() => database.ref(`users/${uid}/budget/spendings/${spending.id}`).remove()} />
-              </Button.Group>
-              </Card.Description>
-            </Card.Content>
-          </Card>
-        
+        const edit = <SpendingForm edit={spending} mainCurrency={mainCurrency} />
+        return <Card 
+          color={typeColors[spending.type]} 
+          main={spending.amount} 
+          secondary={spending.currency} 
+          date={`${spending.date} ${spending.hour}`} 
+          header={spending.desc} 
+          content={spending.place.slice(0, 50)} 
+          footer={spending.type} 
+          remove={() => remove(spending.id)} 
+          key={spending.id}
+          edit={edit} />
       })
     }
-    </Card.Group>
   </>
 }
+

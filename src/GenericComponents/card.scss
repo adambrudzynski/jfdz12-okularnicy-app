@@ -1,0 +1,133 @@
+.courses-container {
+    margin: 10px 0px;
+}
+
+.course {
+	background-color: #fff;
+	border-radius: 20px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+	max-width: 100%;
+	// margin: 20px;
+	overflow: hidden;
+	width: 100%;
+}
+
+.course h6 {
+	opacity: 0.6;
+	margin: 0;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+
+.course h2 {
+	letter-spacing: 1px;
+	margin:  0;
+}
+
+.course h3 {
+	letter-spacing: 1px;
+    margin: 0;
+    opacity: 0.7;
+}
+
+
+.course-preview {
+	// background-color: #2A265F;
+	color: #fff;
+	padding: 15px;
+    max-width: 350px;
+    min-width: 150px;
+}
+
+.course-preview a {
+	color: #fff;
+	display: inline-block;
+	font-size: 12px;
+	opacity: 0.6;
+	margin-top: 30px;
+	text-decoration: none;
+}
+
+.course-info {
+	padding: 10px 10px 40px 15px;
+    position: relative;
+	width: 100%;
+}
+
+.progress-container {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	text-align: right;
+	width: 150px;
+}
+
+.progress {
+	background-color: #ddd;
+	border-radius: 3px;
+	height: 5px;
+	width: 100%;
+}
+
+.progress::after {
+	border-radius: 3px;
+	background-color: #2A265F;
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 5px;
+	width: 66%;
+}
+
+.progress-text {
+	font-size: 10px;
+	opacity: 0.6;
+	letter-spacing: 1px;
+}
+
+.btn {
+	background-color: #ffffff6b;
+	border: 0;
+	// box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+	color: rgb(95, 95, 95);
+	padding: 10px 10px 10px 15px;
+    border: 1px solid #c2c2c26e;
+    max-height: 38px;
+}
+
+.btn.btn-left {
+    border-radius: 15px  0px  0px 15px;
+}
+.btn.btn-right {
+    border-radius: 0px  15px  15px 0px;
+}
+
+.btn:hover {
+    background-color: #e0e0e03d;
+}
+
+.btn-group {
+    position: absolute;
+    margin: 5px 0px 0px 0px;
+	bottom: 5px;
+    right: 5px;
+    
+}
+
+.category {
+    // background-color: #949494d5;
+    padding: 10px 10px 10px 15px;
+    position: absolute;
+    left: 10px;
+    bottom: 5px;
+    // border-radius: 15px;
+    margin: auto 5px;
+    max-height: 38px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    // color: #ffffff6b;
+
+}

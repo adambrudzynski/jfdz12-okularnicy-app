@@ -85,25 +85,17 @@ function MainList() {
     )
 
     if (loading) {
-        return (
-            <>
-             {/* <TopHeader content='Items' subcontent='Pick items to your list'/> */}
-            <Segment>
+        return <Segment>
                 <Dimmer active inverted>
                     <Loader size='large'>Loading</Loader>
                 </Dimmer>
                 <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
             </Segment>
-            </>)
     }
     if (error) {
-        return <>
-         {/* <TopHeader content='Items' subcontent='Pick items to your list'/> */}
-        <h1>"An error occured"</h1>
-        </>
+        return <h1>"An error occured"</h1>
     }
     return <>
-        {/* <TopHeader content='Items' subcontent='Pick items to your list'/> */}
         <Segment.Group horizontal className="filters">
             <Segment className="filter">
                 <ItemSearchInput
