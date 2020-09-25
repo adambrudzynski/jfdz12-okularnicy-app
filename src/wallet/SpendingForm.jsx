@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Form, Label, Button, Modal, Message } from 'semantic-ui-react'
+import { Form, Label, Button, Modal, Message, Dropdown } from 'semantic-ui-react'
 import firebase from "firebase";
 import { useForm } from "react-hook-form";
 
 import { Currency } from './currency'
 import { MyContext } from '../auth/Auth';
+import {spendingCategories} from '../constants/spendingCategory'
 
 const now = new Date()
-
+const options =  spendingCategories.map(item => ({key: item, text: item, value: item}))
 
 
 export default ({ edit, mainCurrency }) => {
@@ -36,6 +37,7 @@ export default ({ edit, mainCurrency }) => {
     const [rates, setRates] = useState(edit? edit.rate : null)
     const [success, setSuccess] = useState(null)
     const [modalOpen, setModalOpen] = useState(false)
+    const [type, setType] = useState(edit? edit.type : '')
     const { register, setValue, handleSubmit, watch, errors, reset, getValues } = useForm({ defaultValues: edit || emptyForm })
     const watchAmount = watch('amount')
     const user = useContext(MyContext)
@@ -43,6 +45,7 @@ export default ({ edit, mainCurrency }) => {
 
     useEffect(() => {
         register({ name: "currency" })
+        register({ name: "type" })
 
         return () => clearTimeout (timeout)
     }, [register])
@@ -150,9 +153,20 @@ export default ({ edit, mainCurrency }) => {
                             </Form.Group>
     
                         <Form.Group>
-                            <Form.Field required>
+                            <Form.Field required width={6}>
                                 <label htmlFor="type">Type</label>
-                                <input name="type" ref={register({ required: true })} />
+                                <Dropdown
+                                    placeholder='Select'
+                                    fluid
+                                    search
+                                    selection
+                                    options={options}
+                                    value={type}
+                                    onChange={(e,{value})=> {
+                                        setValue('type', value); 
+                                        setType(value)
+                                        console.log(getValues('type'));}}
+                                />
                                 {errors.type &&
                                     <Label basic color='red' prompt pointing>
                                         This field is required

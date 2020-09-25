@@ -1,10 +1,10 @@
 import React, {useState, useEffect, useContext } from 'react';
 import firebase from "firebase";
-import { Form, Button, Modal, Message, Icon, Segment } from 'semantic-ui-react';
+import { Form, Button, Modal, Message, Icon } from 'semantic-ui-react';
 import { Currency } from './currency';
 import { MyContext } from '../auth/Auth';
 
-export default ({wallet}) => {
+export default ({wallet, reloadCalc}) => {
 
     const [modalOpen, setModalOpen] = useState(false)
     const [success, setSuccess] = useState(false)
@@ -20,7 +20,8 @@ export default ({wallet}) => {
 
     const timeout = () => setTimeout(() => {
         setSuccess(false)
-        setModalOpen(false)}, 2000)
+        closeModal()
+    }, 2000)
 
     const handleCurrency = (currency, rate) => {
         setCurrency(currency)
@@ -40,11 +41,19 @@ export default ({wallet}) => {
             mainCurrency: data.currency})
         setSuccess(true)
         timeout()
+        if (data.currency !== wallet.mainCurrency){
+            reloadCalc()
+        }
+    }
+
+    const closeModal = () => {
+        setAmount(wallet.budget[0].amount | 0)
+        setModalOpen(false)
     }
 
    return <Modal  
             open={modalOpen}    
-            onClose={() => setModalOpen(false)} 
+            onClose={closeModal} 
             closeOnDimmerClick={false}
             size="tiny" 
             trigger={<Button
@@ -89,9 +98,7 @@ export default ({wallet}) => {
 
                             <Button.Group floated="right">
                                 <Button type="reset" 
-                                        onClick={() => {
-                                                    setModalOpen(false)
-                                                }} 
+                                        onClick={closeModal} 
                                         content='Close'  />
                                 <Button as='button' type="submit" content='Save' positive disabled={(amount < 0.01 || currency === '') ? true : false}/>
                             </Button.Group> 

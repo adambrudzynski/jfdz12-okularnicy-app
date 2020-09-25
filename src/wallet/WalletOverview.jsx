@@ -4,7 +4,7 @@ import WalletConf from './WalletConf'
 
 
 
-export default ({ wallet, loading, spent }) => {
+export default ({ wallet, loading, spent, reloadCalc }) => {
     
 
     const placeholder = () => {
@@ -14,7 +14,7 @@ export default ({ wallet, loading, spent }) => {
     }
    
     return <>
-        <Header>Wallet summary {wallet.budget && <WalletConf wallet={wallet}/>}</Header>
+        <Header>Wallet summary {wallet.budget && <WalletConf reloadCalc={reloadCalc} wallet={wallet}/>}</Header>
         <Card fluid>
             <Card.Content>
                <Table basic='very' celled unstackable compact>

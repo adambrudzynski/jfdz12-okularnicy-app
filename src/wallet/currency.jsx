@@ -20,6 +20,9 @@ export const Currency = ({ handleCurrency, mainCurrency, compact, edit, all }) =
             const currencies = Object.keys(data.rates).map(rate => {
                 return { text: rate, value: rate, key: rate }
             })
+            if (currency === 'EUR') {
+                currencies.push({text: "EUR", value: "EUR", key: "EUR"})
+            }
             handleCurrency(currency, data.rates[currency], data)
             setRate(data)
             setCurrencies(currencies)

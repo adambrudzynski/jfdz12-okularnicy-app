@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button,Form, Message} from 'semantic-ui-react'
 import firebase from "firebase";
+import {createDemoUser} from './createDemoUser';
 
 
 export class SignIn extends React.Component {
@@ -135,6 +136,7 @@ export class SignIn extends React.Component {
                 <Button.Group vertical fluid>
                     <Button disabled={(email.trim().length < 1 || password.trim().length < 1)} content='Login' color='orange' onClick={this.handleOnClick} />
                     <Button content='Forgot password' onClick={this.handleOnClickForgot} />
+                    <Button size='big' color='teal' content='DEMO' fluid onClick={createDemoUser}/>
                 </Button.Group>
             </Form>)
     }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Tab} from 'semantic-ui-react'
+import {Tab, Button} from 'semantic-ui-react'
 
 
 import {SignIn} from './SignIn'
@@ -13,7 +13,10 @@ export function Login() {
         render: () => <Tab.Pane content={<SignUp/>} /> }
       ]
       
-    return <Tab panes={panes} />
+    return <>
+    <Tab panes={panes} />
+    
+    </>
 }
 
 

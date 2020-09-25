@@ -60,7 +60,7 @@ export const Wallet = () => {
 
     const getData = async (list) => {
         const currency = await walletRef.once('value').then(snapshot=> snapshot.val().mainCurrency)
-        setSpent(calculateSpent(list, currency))
+        setSpent(calculateSpent(list || spendings, currency))
     }
 
 
@@ -90,7 +90,7 @@ export const Wallet = () => {
         <Responsive maxWidth={650}>
             <TopHeader content='Wallet' subcontent='Manage your budget' mobileMenu={mobilemenu} />
             {activeMenu === 0 
-            ?<><WalletOverview wallet={wallet} loading={loading} spent={spent}/>
+            ?<><WalletOverview reloadCalc={getData} wallet={wallet} loading={loading} spent={spent}/>
             <Spendings spendings={spendings} error={spendingError} loading={spendingsLoading} mainCurrency={wallet.mainCurrency} /></>
             :<Charts wallet={wallet} spent={spent}/>}
         </Responsive>
@@ -98,7 +98,7 @@ export const Wallet = () => {
         <TopHeader content='Wallet' subcontent='Manage your budget'/>
             <Grid columns={2} >
                 <Grid.Column >
-                    <WalletOverview wallet={wallet} loading={loading} spent={spent} />
+                    <WalletOverview reloadCalc={getData} wallet={wallet} loading={loading} spent={spent} />
                     <Spendings spendings={spendings} error={spendingError} loading={spendingsLoading} mainCurrency={wallet.mainCurrency}/>
                 </Grid.Column>
                 <Grid.Column>
