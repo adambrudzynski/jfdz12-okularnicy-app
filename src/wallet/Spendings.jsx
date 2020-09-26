@@ -1,6 +1,6 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import firebase from 'firebase'
-import { Segment } from 'semantic-ui-react'
+import { Segment, Header } from 'semantic-ui-react'
 import SpendingForm from './SpendingForm'
 import CardPlaceholder from '../Placeholders/CardPlaceholder'
 import { MyContext } from '../auth/Auth';
@@ -10,19 +10,23 @@ import { typeColors } from '../constants/colors'
 
 export default ({ spendings, loading, error, mainCurrency }) => {
 
+  const [removed, setRemoved] = useState(null)
   const database = firebase.database()
   const user = useContext(MyContext)
   const uid = user.state.user.uid
 
   const remove = (id) => {
-    database.ref(`users/${uid}/budget/spendings/${id}`).remove()
-      .then(function() {
-        console.log("Remove succeeded.")
+    setRemoved(id)
+    setTimeout(() => {
+      database.ref(`users/${uid}/budget/spendings/${id}`).remove()
+      .then(() => {
+        setRemoved(null)
       })
-      .catch(function(error) {
+      .catch((error) => {
         console.log("Remove failed: " + error.message)
+        setRemoved(null)
       });
-    console.log('remove', id);
+    }, 666);  
   }
 
  
@@ -37,11 +41,13 @@ export default ({ spendings, loading, error, mainCurrency }) => {
     </Segment>
   </>
   return <>
+    <Header content='Your spendings' />
     <SpendingForm  mainCurrency={mainCurrency} />
     {
       spendings.map(spending => {
         const edit = <SpendingForm edit={spending} mainCurrency={mainCurrency} />
         return <Card 
+          removed={removed===spending.id}
           color={typeColors[spending.type]} 
           main={spending.amount} 
           secondary={spending.currency} 

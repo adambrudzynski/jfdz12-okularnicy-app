@@ -41,7 +41,8 @@ const Charts = ({wallet, spent}) => {
         startAngle={0}
         viewBoxSize={[130, 110]}
         labelStyle={{
-            fontSize: "5px"  
+            fontSize: "5px",
+            fill: 'rgba(0, 0, 0, 0.6)' 
         }}
         />
     <Header>Spendings by currency</Header>
@@ -55,7 +56,7 @@ const Charts = ({wallet, spent}) => {
         paddingAngle={2}
         radius={30}
         startAngle={0}
-        viewBoxSize={[130, 80]}
+        viewBoxSize={[130, 90]}
         labelStyle={{
             fontSize: "4px",
             fill: "#00b5ad"    

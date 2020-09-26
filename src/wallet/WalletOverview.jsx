@@ -1,6 +1,7 @@
 import React from 'react'
-import { Header, Card, Table, Placeholder } from 'semantic-ui-react'
+import { Header, Table, Placeholder } from 'semantic-ui-react'
 import WalletConf from './WalletConf'
+import { Card } from '../GenericComponents/Card'
 
 
 
@@ -14,9 +15,11 @@ export default ({ wallet, loading, spent, reloadCalc }) => {
     }
    
     return <>
-        <Header>Wallet summary {wallet.budget && <WalletConf reloadCalc={reloadCalc} wallet={wallet}/>}</Header>
-        <Card fluid>
-            <Card.Content>
+       
+        {/* <Card fluid>
+            <Card.Content> */}
+            <Card>
+            <Header>Wallet summary {wallet.budget && <WalletConf reloadCalc={reloadCalc} wallet={wallet}/>}</Header>
                <Table basic='very' celled unstackable compact>
                     <Table.Body>
                         <Table.Row>
@@ -47,7 +50,7 @@ export default ({ wallet, loading, spent, reloadCalc }) => {
                         </Table.Row>
                        </Table.Body>
                 </Table>                  
-            </Card.Content>
+            {/* </Card.Content> */}
         </Card>
   </>
 }

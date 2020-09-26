@@ -10,18 +10,18 @@ export const CardBtn = ({icon, side, onClick}) => {
 }
 
 
-export const Card = ({color, main, secondary, date ,header, content, footer, remove, edit}) => {
+export const Card = ({color, main, secondary, date ,header, content, footer, remove, edit, removed, children, bgColor}) => {
 
-    return <><div className="courses-container">
-	<div className="course">
-		<div className="course-preview" style={{backgroundColor: color ? color : "#f26202"}}>
+    return <><div className={removed? 'cards-container removed' : "cards-container"}>
+	<div className="card" style={main && {display: 'flex'}}>
+		{main && <div className="card-preview" style={{backgroundColor: color ? color : "#f26202"}}>
 			<h2>{main}</h2>
             <h3>{secondary}</h3>
             <h6>{date}</h6>
 			{/* <a href="#">View all chapters <i className="fas fa-chevron-right"></i></a> */}
-            
-		</div>
-		<div className="course-info">
+        
+		</div>}
+		<div className={remove||edit||footer? "card-info footer" : "card-info"} style={{backgroundColor: bgColor ? bgColor : "#fff"}}>
 			{/* <div className="progress-container">
 				<div className="progress"></div>
 				<span className="progress-text">
@@ -29,15 +29,13 @@ export const Card = ({color, main, secondary, date ,header, content, footer, rem
 				</span>
 			</div>
 			<h6>Chapter 4</h6> */}
-			<h3>{header}</h3>
-                <Icon name="location arrow"/>{content}
-        <div className="category" style={{color: color ? color : "#f26202"}}>{footer}</div> 
+			{children}
+			{header&&<h3>{header}</h3>}
+                {content && <> <Icon name="location arrow"/> {content}</>}
+        {footer && <div className="category" style={{color: color ? color : "#f26202"}}>{footer}</div>}
             <div className="btn-group">
-                {/* <button className="btn btn-left" onClick={remove}>
-                    <Icon name='trash' />
-                </button> */}
-                <CardBtn icon='trash' side='left' onClick={remove}/>
-                {edit}
+            	{remove && <CardBtn icon='trash' side='left' onClick={remove}/>}
+        		{edit && edit}
             </div>
 		</div>
 	</div>

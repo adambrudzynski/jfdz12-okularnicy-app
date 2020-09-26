@@ -1,8 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navigation from './navigation/Navigation';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
-import MainList from './main-list/Main-list';
+import { BrowserRouter, Route, Redirect, Switch, useLocation  } from 'react-router-dom';
 import Dashboard from './dashboard/Dashboard';
 import ItemDetails from './item-details/Item-details';
 import UserList from './user-list/User-list';
@@ -12,13 +11,8 @@ import AuthProtected from './auth/AuthProtected';
 import { Wallet } from './wallet/Wallet';
 import { Lists } from './main-list/Lists';
 
-
-
 function App() {
-  return (
-  
-      <BrowserRouter>
-        
+  return <BrowserRouter>   
         <div className="containerWrapper" >
           <AuthProtected>
             <Switch>
@@ -61,9 +55,7 @@ function App() {
         
         </div>
         <Navigation />
-      </BrowserRouter>
-
-  );
+      </BrowserRouter>;
 }
 
 export default App;

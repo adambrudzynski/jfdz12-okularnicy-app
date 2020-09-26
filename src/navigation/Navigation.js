@@ -1,57 +1,51 @@
-import React, { useContext, useState } from 'react'
-import { Icon, Menu, Button, Image, Label } from 'semantic-ui-react'
-import { Link } from 'react-router-dom';
-import { MyContext } from '../auth/Auth';
+import React, { useState, useEffect } from 'react'
+import { Icon, Menu} from 'semantic-ui-react'
+import { Link, useLocation } from 'react-router-dom';
+
 
 const Navigation = () => {
-
   const [activeItem, setActiveItem] = useState("")
-  const context = useContext(MyContext)
+  let location = useLocation()
 
-  const handleItemClick = (e, { name }) => setActiveItem(name)
-  const handleLogout = () => context.logout()
+  useEffect(() => {
+      setActiveItem(location.pathname)
+    },
+    [location])
 
-  return (
-    <Menu icon='labeled' size='mini' fixed='bottom'>
-      {/* <Link to="/user-list">
-        <Menu.Item
-          as='div'
-          name='list'
-          active={activeItem === 'list'}
-          onClick={handleItemClick}
-        >
-          <Icon name='list ul' />
-          {context.state.userList.length > 0 && <Label floating color='teal' circular>
-            {context.state.userList.length}
-          </Label>}
-          My list
-        </Menu.Item>
-      </Link> */}
-      <Link to="/">
+  return <Menu icon='labeled' size='mini' fixed='bottom'>
+      {/* <Link to="/">
         <Menu.Item
           as='div'
           name='home'
-          active={activeItem === 'home'}
-          onClick={handleItemClick}
+          active={activeItem === '/'}
         >
           <Icon name='home' />
           Home
         </Menu.Item>
+      </Link>   */}
+      <Link to="/">
+        <Menu.Item
+          color={activeItem === '/'? 'teal' : "black"}
+          as='div'
+          name='List'
+          active={activeItem === '/'}
+        >
+          <Icon name='tasks' />
+          List
+        </Menu.Item>
       </Link>
       <Link to="/wallet">
         <Menu.Item
+          color={activeItem === '/wallet'? 'teal' : "black"}
           as='div'
           name='wallet'
-          active={activeItem === 'wallet'}
-          onClick={handleItemClick}
+          active={activeItem === '/wallet'}
         >
           <Icon name='money bill alternate outline' />
           Wallet
         </Menu.Item>
       </Link>
     </Menu>
-
-  )
 }
 
 export default Navigation
